@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+    width: 100vw;
+    background-color: #9dbdd7;
+    display: flex;
+    flex-direction: column;
+    /* Arrange children vertically */
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+    height: 5rem;
+    line-height: 5rem;
+    background-color: #33658a;
+    color: whitesmoke;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    width: 100vw;
+}
+
+.main-content {
+    display: flex;
+    flex: 1;
+    /* Take up remaining space */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+}
+
+.calculator {
+    width: 40rem;
+    height: 40rem;
+    display: grid;
+    grid-template-areas:
+        "screen screen screen screen"
+        " AC AC arrow divide"
+        "seven eight nine multiply"
+        "four five six minus"
+        "one two three plus"
+        "zero zero dot equal";
+    gap: 0.1rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.screen {
+    background-color: #136F63;
+    color: aliceblue;
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.prevResult {
+    font-size: 2.5rem;
+    color: rgb(167, 186, 206);
+}
+
+button {
+    background-color: #dba00a;
+    color: aliceblue;
+    font-size: 2rem;
+    font-weight: 900;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffb805;
+}
+
+button:active {
+    background-color: grey;
+}
+
+.AC {
+    background-color: #e43131;
+}
+
+.AC:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.arrow,
+.plus,
+.minus,
+.multiply,
+.divide,
+.equal {
+    background-color: #032B43;
+}
+
+.arrow:hover,
+.plus:hover,
+.minus:hover,
+.multiply:hover,
+.equal:hover,
+.divide:hover {
+    background-color: #124f76;
+}
+
+.AC:active,
+.arrow:active,
+.plus:active,
+.minus:active,
+.multiply:active,
+.equal:active,
+.divide:active {
+    background-color: rgb(221, 165, 117);
+}

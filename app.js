@@ -105,11 +105,15 @@ let handleSymbols = (symbol) => {
         // cpbuffer = "0";
         prevSymbol = "=";
         enableBtns();
-        // document.querySelector('.screen').classList.add('move-down');
-        // setTimeout(() => {
-        //     document.querySelector('.screen').classList.remove('move-down');
-        //     prevResult.innerText = "";
-        // }, 500); // Match with CSS transition duration
+        prevResult.classList.add('move-down');
+        setTimeout(() => {
+            // Remove animation class
+            prevResult.classList.remove('move-down');
+            
+            // Clear the buffer and the preResult
+            prevResult.innerText = "";
+            result.innerText = total;
+        }, 500);
     } else {
         calculate();
         prevSymbol = symbol;

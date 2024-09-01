@@ -69,6 +69,7 @@ body {
 .prevResult {
     font-size: 2.5rem;
     color: rgb(167, 186, 206);
+    transition: all 0.5s ease;
 }
 
 button {
@@ -124,4 +125,9 @@ button:active {
 .multiply:active,
 .divide:active {
     background-color: rgb(221, 165, 117);
+}
+
+.move-down {
+    transform: translateY(6rem); /* Adjust this value based on your layout */
+    opacity: 0;
 }

@@ -42,7 +42,7 @@ body {
     display: grid;
     grid-template-areas:
         "screen screen screen screen"
-        " AC AC arrow divide"
+        " AC percent arrow divide"
         "seven eight nine multiply"
         "four five six minus"
         "one two three plus"
@@ -63,6 +63,7 @@ body {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     padding: 1rem;
+    overflow: hidden;
 }
 
 .prevResult {
@@ -96,6 +97,7 @@ button:active {
 }
 
 .arrow,
+.percent,
 .plus,
 .minus,
 .multiply,
@@ -105,6 +107,7 @@ button:active {
 }
 
 .arrow:hover,
+.percent:hover,
 .plus:hover,
 .minus:hover,
 .multiply:hover,
@@ -114,11 +117,11 @@ button:active {
 }
 
 .AC:active,
+.percent:active,
 .arrow:active,
 .plus:active,
 .minus:active,
 .multiply:active,
-.equal:active,
 .divide:active {
     background-color: rgb(221, 165, 117);
 }

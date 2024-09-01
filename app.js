@@ -22,6 +22,23 @@ buttons.addEventListener("click", (event) => {
 });
 
 let handleNumbers = (number) => {
+    if (prevSymbol == "=") {
+        // if (isNaN(buffer[buffer.length - 1])) {
+        //     buffer += number;
+        //     result.innerText = buffer;
+        //     enableBtns();
+        // }
+        // else 
+        {
+            buffer = "";
+            buffer += number;
+            cpbuffer = "0";
+            cpbuffer += number;
+            result.innerText = buffer;
+            enableBtns();
+        }
+        return;
+    }
     if (["+", "-", "×", "÷", "%"].includes(buffer[buffer.length - 1])) {
         disableBtns();
     }
@@ -33,6 +50,7 @@ let handleNumbers = (number) => {
         buffer = number;
         cpbuffer = number;
         result.innerText = buffer;
+        enableBtns();
     } else if (number == ".") {
         dot.disabled = true;
         buffer += number;
@@ -47,6 +65,7 @@ let handleNumbers = (number) => {
 }
 
 let handleSymbols = (symbol) => {
+
     if (symbol == "AC") {
         buffer = "0";
         cpbuffer = "";
@@ -64,6 +83,7 @@ let handleSymbols = (symbol) => {
             result.innerText = "0";
             prevResult.innerText = "";
             dot.disabled = false;
+            enableBtns()
             return;
         }
         if (buffer[buffer.length - 1] == ".") {
@@ -82,14 +102,14 @@ let handleSymbols = (symbol) => {
         calculate();
         result.innerText = total;
         buffer = total.toString();
-        cpbuffer = "0";
-        prevSymbol = "";
+        // cpbuffer = "0";
+        prevSymbol = "=";
         enableBtns();
-        document.querySelector('.screen').classList.add('move-down');
-        setTimeout(() => {
-            document.querySelector('.screen').classList.remove('move-down');
-            prevResult.innerText = "";
-        }, 500); // Match with CSS transition duration
+        // document.querySelector('.screen').classList.add('move-down');
+        // setTimeout(() => {
+        //     document.querySelector('.screen').classList.remove('move-down');
+        //     prevResult.innerText = "";
+        // }, 500); // Match with CSS transition duration
     } else {
         calculate();
         prevSymbol = symbol;

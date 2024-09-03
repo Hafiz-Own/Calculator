@@ -23,24 +23,15 @@ buttons.addEventListener("click", (event) => {
 
 let handleNumbers = (number) => {
     if (prevSymbol == "=") {
-        // if (isNaN(buffer[buffer.length - 1])) {
-        //     buffer += number;
-        //     result.innerText = buffer;
-        //     enableBtns();
-        // }
-        // else 
-        {
-            buffer = "";
-            buffer += number;
-            cpbuffer = "0";
-            cpbuffer += number;
-            result.innerText = buffer;
-            enableBtns();
-        }
+        buffer = number;
+        cpbuffer = number;
+        result.innerText = buffer;
+        enableBtns();
         return;
     }
+
     if (["+", "-", "×", "÷", "%"].includes(buffer[buffer.length - 1])) {
-        disableBtns();
+        cpbuffer = "";
     }
 
     if (buffer == "0") {
@@ -49,23 +40,21 @@ let handleNumbers = (number) => {
         }
         buffer = number;
         cpbuffer = number;
-        result.innerText = buffer;
-        enableBtns();
     } else if (number == ".") {
-        dot.disabled = true;
-        buffer += number;
-        cpbuffer += number;
-        result.innerText = buffer;
+        if (!cpbuffer.includes(".")) {
+            dot.disabled = true;
+            buffer += number;
+            cpbuffer += number;
+        }
     } else {
         buffer += number;
         cpbuffer += number;
-        result.innerText = buffer;
-        enableBtns();
     }
+    result.innerText = buffer;
+    enableBtns();
 }
 
 let handleSymbols = (symbol) => {
-
     if (symbol == "AC") {
         buffer = "0";
         cpbuffer = "";
@@ -76,6 +65,10 @@ let handleSymbols = (symbol) => {
         dot.disabled = false;
         enableBtns();
     } else if (symbol == "←") {
+
+        if(buffer[buffer.length - 1] =="."){
+            dot.disabled = false;
+        }
         if (buffer.length <= 1 || buffer == ".") {
             buffer = "0";
             cpbuffer = "";
@@ -83,46 +76,54 @@ let handleSymbols = (symbol) => {
             result.innerText = "0";
             prevResult.innerText = "";
             dot.disabled = false;
-            enableBtns()
+            enableBtns();
             return;
         }
-        if (buffer[buffer.length - 1] == ".") {
-            buffer = buffer.substring(0, buffer.length - 1);
-            result.innerText = buffer;
-            dot.disabled = false;
-            return;
+
+        buffer = buffer.substring(0, buffer.length - 1);
+        if (["+", "-", "×", "÷", "%"].includes(buffer[buffer.length - 1])) {
+            cpbuffer = ""; 
         } else {
-            if (["+", "-", "×", "÷", "%"].includes(buffer[buffer.length - 1])) {
-                enableBtns();
-            }
-            buffer = buffer.substring(0, buffer.length - 1);
+            cpbuffer = buffer;
+        }
+
+        result.innerText = buffer;
+
+        if (buffer === "") {
+            buffer = "0";
             result.innerText = buffer;
         }
+
+        if (["+", "-", "×", "÷", "%"].includes(buffer[buffer.length - 1])) {
+            disableBtns();
+        } else {
+            enableBtns();
+        }
+
     } else if (symbol == "=") {
         calculate();
         result.innerText = total;
         buffer = total.toString();
-        // cpbuffer = "0";
         prevSymbol = "=";
         enableBtns();
         prevResult.classList.add('move-down');
         setTimeout(() => {
-            // Remove animation class
             prevResult.classList.remove('move-down');
-            
-            // Clear the buffer and the preResult
             prevResult.innerText = "";
             result.innerText = total;
         }, 500);
     } else {
-        calculate();
-        prevSymbol = symbol;
-        buffer += symbol;
-        result.innerText = buffer;
-        dot.disabled = false;
-        disableBtns();
+        if (!["+", "-", "×", "÷", "%"].includes(buffer[buffer.length - 1])) {
+            calculate();
+            prevSymbol = symbol;
+            buffer += symbol;
+            result.innerText = buffer;
+            dot.disabled = false;
+            disableBtns();
+        }
     }
 }
+
 
 let calculate = () => {
     if (prevSymbol == "+") {

@@ -20,4 +20,4 @@ Welcome to my custom calculator project! This project is a web-based calculator 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/custom-calculator.git
+   git clone https://github.com/Hafiz-Own/custom-calculator.git
